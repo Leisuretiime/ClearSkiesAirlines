@@ -1,0 +1,61 @@
+﻿@model Model.Login
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+    <br />
+    <section class="wrapper">
+        <div class="inside-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="col-md-offset-2">
+                            <img src="../img/CSA2-invert-blue-and-name.png" alt="large company logo above login form" height="245" width="177"/>
+                        </div>
+                        
+                        <br />
+                        <br />
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Brukernavn, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Brukernavn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Brukernavn, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Passord, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Passord, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Passord, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3">
+                                <input type="submit" value="Logg inn" class="btn btn-default" />
+                            </div>
+                        </div>
+                        @if (ViewBag.Innlogget == false)
+                        {
+
+                            <div class="text-center col-md-10 alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong> Feil brukernavn eller passord.</strong></div>
+                        }
+                        @if (ViewBag.Innlogget == true)
+                        {
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

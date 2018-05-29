@@ -1,0 +1,36 @@
+﻿
+#kundeTabell th {
+    background-color: #5792f2;
+    color: white;
+    border-collapse: collapse;
+}
+
+#kundeTabell tr:hover {
+    background-color: #AECBFA;
+}
+
+.adminKundeLink {
+    color: white;
+    text-decoration: underline;
+}
+
+.contentMain {
+    width: 100%;
+    margin-top: 3em;
+}
+
+.pageNumber {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.searchContent {
+    float: right;
+    width: 40%;
+}
+
+.mainHeader {
+    float: left;
+    width: 50%;
+}

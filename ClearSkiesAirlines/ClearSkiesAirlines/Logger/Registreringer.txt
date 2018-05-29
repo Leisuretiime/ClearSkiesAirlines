@@ -1,0 +1,13 @@
+10/27/17 11:18:05 AMBillett er slettet. ID: 2
+10/27/17 11:18:16 AMHandel er slettet. ID: 1
+10/27/17 11:20:03 AMBestilling er endret i DB til: 1 Knut til Arne
+10/27/17 6:33:49 PMBestilling er endret i DB til: 2 Arne til Arnesen
+10/27/17 6:33:57 PMBestilling er endret i DB til: 2 Arne til Bjarne
+10/27/2017 6:40:54 PMBestilling er endret i DB til: 3 Birger til Olsen
+10/27/2017 6:40:57 PMBillett er slettet. ID: 4
+10/28/2017 1:22:53 PMBestilling er endret i DB til: 3 Birger til Olsen
+10/28/2017 1:22:59 PMKunde er endret i DB: 3 Arnesen
+10/28/2017 1:23:02 PMBillett er slettet. ID: 3
+10/28/2017 1:23:05 PMReise er slettet. ID: 6
+10/28/2017 1:49:06 PMBillett er slettet. ID: 3
+

@@ -1,0 +1,64 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-inverse {
+    background: #5792f2 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.navbar-default {
+    background: #5792f2 !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white !important;
+
+}
+
+.navbar-nav li:hover {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #5792f2 !important;
+}
+
+#AdminMeny {
+    margin-top:10px;
+}
+
+#filterFelt {
+    display: inline-block !important;
+}
+
+.news {
+    margin-left: 0;
+    width: 60%;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+    color: #fff;
+}
+
+.activeLi {
+    color: #5792f2 !important;
+    background-color: #fff;
+}

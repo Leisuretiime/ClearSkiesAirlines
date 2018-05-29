@@ -1,0 +1,110 @@
+﻿@model PagedList.IPagedList<Model.KundeView>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/kundeListe.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Administrer kunder";
+}
+
+
+<div class="contentMain">
+    <div class="mainHeader">
+    <h2>Administrer kunder</h2>
+    </div>
+    @using (Html.BeginForm("administrerKunder", "ClearSkies", FormMethod.Get))
+    {
+        <div class="searchContent">
+            Søk på navn: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "filterFelt" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    }
+    <table class="table" id="kundeTabell">
+        <tr>
+            <th class="col-md-1">
+                @Html.ActionLink("Fornavn", "administrerKunder", new { sortOrder = ViewBag.Surname }, new { @class = "adminKundeLink" })
+            </th>
+            <th class="col-md-1">
+                @Html.ActionLink("Etternavn", "administrerKunder", new { sortOrder = ViewBag.FamilyName }, new { @class = "adminKundeLink" })
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Epost)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Adresse)
+            </th>
+            <th class="col-md-1">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PostNr)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PostSted)
+            </th>
+            <th class="col-md-1">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Telefon)
+            </th>
+            <th class="col-md-1"></th>
+            <th class="col-md-1"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fornavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Etternavn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Epost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adresse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostSted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefon)
+                </td>
+                <td>
+                    @Html.ActionLink("Endre", "endreKunde", new { id=item.kundeId }, new { @class = "btn btn-default" })
+                </td>
+                <td>
+                    @Html.ActionLink("Slett", "slettKunde", new {id=item.kundeId}, new { @class = "btn btn-danger slett", onclick ="return confirm('Er du sikker på at du vil slette denne kunden?')" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+
+    <div class="pageNumber">
+
+        @{
+            if (ViewBag.Feil == true)
+            {
+                <div class="text-center col-md-12 alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong>Det har oppstått en feil. Prøv igjen senere.</strong></div>
+            }
+            else if (ViewBag.Feil == false)
+            {
+                <script>console.log("TEST?");</script>
+                <div id="slettDiv" class="text-center col-md-12 alert alert-success"><span class="glyphicon glyphicon-alert"></span><strong>Kunde er slettet.</strong></div>
+            }
+        }   
+
+        @Html.PagedListPager(Model, page => Url.Action("administrerKunder",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(".navbar").find(".activeLi").removeClass("activeLi");
+    $(".kunder").addClass("activeLi");
+</script>

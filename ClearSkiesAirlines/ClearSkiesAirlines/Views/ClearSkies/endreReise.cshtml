@@ -1,0 +1,131 @@
+﻿@model Model.ReiseReg
+
+@{
+    ViewBag.Title = "Endre reise";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Endre reise</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fra, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fra, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fra, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Destinasjon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Destinasjon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Destinasjon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kapasitet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kapasitet, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Kapasitet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pris, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Pris, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pris, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Avreise, htmlAttributes: new { @class = "control-label col-md-2", default_value = Model.Ankomst})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Avreise, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Avreise, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AvreiseTid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AvreiseTid, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AvreiseTid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ankomst, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ankomst, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ankomst, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnkomstTid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AnkomstTid, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AnkomstTid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lagre endringer" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@{
+    if (ViewBag.Feil == true)
+    {
+        <div class="text-center col-md-12 alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong>Det har oppstått en feil. Prøv igjen senere.</strong></div>
+    }
+    if (ViewBag.RegEx == false)
+    {
+        <div class="text-center col-md-12 alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong>Fyll inn alle felt riktig.</strong></div>
+    }
+}
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		//Setter minimum dato på utreise til i dag//
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth() + 1; //Januar er 0!
+		var yyyy = today.getFullYear();
+		if (dd < 10) {
+			dd = '0' + dd
+		}
+		if (mm < 10) {
+			mm = '0' + mm
+		}
+
+		today = yyyy + '-' + mm + '-' + dd;
+		document.getElementById("Avreise").setAttribute("min", today);
+		document.getElementById("Ankomst").setAttribute("min", today);
+
+		$("#Avreise").change(function () {
+			var dato = $("#Avreise").val();
+			document.getElementById("Ankomst").value = dato;
+			document.getElementById("Ankomst").setAttribute("min", dato);
+		});
+	});
+</script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(".navbar").find(".activeLi").removeClass("activeLi");
+    $(".reiser").addClass("activeLi");
+</script>

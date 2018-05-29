@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<Model.BestillingView>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/kundeListe.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Administrer bestillinger";
+}
+
+<div class="contentMain">
+    <div class="mainHeader">
+        <h2>Administrer bestillinger</h2>
+    </div>
+    @using (Html.BeginForm("administrerBestillinger", "ClearSkies", FormMethod.Get))
+    {
+        <div class="searchContent">
+            Søk på navn: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "filterFelt" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    }
+    <table class="table" id="kundeTabell">
+
+        <tr>
+            <th>
+                @Html.ActionLink("HandelId", "administrerBestillinger", new { sortOrder = ViewBag.handelId }, new { @class = "adminKundeLink" })
+            </th>
+            <th>
+                @Html.ActionLink("Eier", "administrerBestillinger", new { sortOrder = ViewBag.eier }, new { @class = "adminKundeLink" })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AntallBilletter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().TotalPris)
+            </th>
+            <th class="col-md-1"></th>
+            <th class="col-md-1"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HandelId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AntallBilletter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPris)
+                </td>
+                <td>
+                    @Html.ActionLink("Endre", "endreBestilling", new { id = item.HandelId }, new { @class = "btn btn-default" })
+                </td>
+                <td>
+                    @Html.ActionLink("Slett", "slettBestilling", new { id = item.HandelId }, new { @class = "btn btn-danger slett", onclick = "return confirm('Er du sikker på at du vil slette denne bestillingen?')" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="pageNumber">
+
+        @{
+            if (ViewBag.Feil == true)
+            {
+                <div class="text-center col-md-12 alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong>Det har oppstått en feil. Prøv igjen senere.</strong></div>
+            }
+            else if (ViewBag.Feil == false)
+            {
+                <div id="slettDiv" class="text-center col-md-12 alert alert-success"><span class="glyphicon glyphicon-alert"></span><strong>Bestilling er slettet.</strong></div>
+            }
+        }
+
+        @Html.PagedListPager(Model, page => Url.Action("AdministrerBestillinger",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(".navbar").find(".activeLi").removeClass("activeLi");
+    $(".bestillinger").addClass("activeLi");
+</script>

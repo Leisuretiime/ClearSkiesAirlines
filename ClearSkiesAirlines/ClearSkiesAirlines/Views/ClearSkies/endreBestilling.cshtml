@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Model.BestillingBilletter>
+<link href="~/Content/kundeListe.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Endre Bestilling";
+}
+
+<h2>Endre bestilling</h2>
+
+<table class="table" id="kundeTabell">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BillettId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Til)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avreise)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassasjerFornavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassasjerEtternavn)
+        </th>
+        <th class="col-md-1"></th>
+        <th class="col-md-1"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillettId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Til)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avreise)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassasjerFornavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassasjerEtternavn)
+        </td>
+        <td>
+            @Html.ActionLink("Endre", "endreBillett", new { id = item.BillettId }, new { @class = "btn btn-default" })
+        </td>
+        <td>
+            @Html.ActionLink("Slett", "slettBillett", new { id = item.BillettId }, new { @class = "btn btn-danger slett", onclick = "return confirm('Er du sikker på at du vil slette denne billetten?')" })
+        </td>
+    </tr>
+}
+
+</table>
+
+@{
+    if (ViewBag.Feil == true)
+    {
+        <div class="text-center col-md-12 alert alert-danger"><span class="glyphicon glyphicon-alert"></span><strong>Det har oppstått en feil. Prøv igjen senere.</strong></div>
+    }
+    else if (ViewBag.Feil == false)
+    {
+        <div id="slettDiv" class="text-center col-md-12 alert alert-success"><span class="glyphicon glyphicon-alert"></span><strong>Billett er slettet.</strong></div>
+    }
+}
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(".navbar").find(".activeLi").removeClass("activeLi");
+    $(".bestillinger").addClass("activeLi");
+</script>

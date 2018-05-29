@@ -1,0 +1,8 @@
+﻿
+            <li>@Html.ActionLink("Registrer reiser", "RegistrerReise", null, new { @class = "regReise" })</li>
+            <li>@Html.ActionLink("Administrer reiser", "AdministrerReiser", null, new { @class = "reiser" })</li>
+            <li>@Html.ActionLink("Administrer kunder", "administrerKunder", null, new { @class = "kunder" })</li>
+            <li>@Html.ActionLink("Administrer bestillinger", "AdministrerBestillinger", null, new { @class = "bestillinger" })</li>
+           <li>
+               <a href="@Url.Action("logOut", "ClearSkies")"><span class="glyphicon glyphicon-log-out"></span> Logg ut</a>
+           </li>
